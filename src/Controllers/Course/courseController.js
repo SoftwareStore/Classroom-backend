@@ -1,5 +1,5 @@
 const Course = require('../../Models/Course/courseModel');
-
+const User = require('../../Models/User/userModel')
 module.exports = {
     index: async (req, res, next) => {
         const courses = await Course.find({});
@@ -19,14 +19,24 @@ module.exports = {
     },
     getCourse: async (req, res, next) => {
         console.log(req.body)
-        const course = await Course.find({ Code: req.body.code })
+        const course = await Course.find({ Code: req.body.code }).populate("participants")
         res.status(200).json({ course })
 
     }
     ,
     addParticipant: async (req, res, next) => {
-        console.log(req.body)
-        const course = await Course.findOneAndUpdate({ code: req.body.code }, { $push: { 'participants': req.body.participants } })
+
+        const courseCode = req.body.code;
+        const participants = req.body.participants;
+        var codes = participants.values();
+
+        const course = await Course.findOneAndUpdate({ code: courseCode }, { $push: { 'participants': participants } })
+        const courseId = course._id
+        for (let user of codes) {
+
+            const userTemp = await User.findOneAndUpdate({ _id: user }, { $push: { 'courses': courseId } })
+        }
+
         res.status(200).json({ course });
 
     }
