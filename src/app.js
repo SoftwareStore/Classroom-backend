@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cookieParser = require("cookie-parser")
 const app = express();
 
 //settings
 app.set('port', process.env.PORT || 3000);
 app.use(express.json());
+app.use(cookieParser())
 // app.use(cors({ origin: [process.env.CLIENT_URL], credentials: true }));
 
 //RUTAS
