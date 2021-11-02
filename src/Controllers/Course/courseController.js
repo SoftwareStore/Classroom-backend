@@ -20,7 +20,10 @@ module.exports = {
     },
     getCourse: async (req, res, next) => {
         //Obtiene un curso ingresando el codigo del curso
-        const course = await Course.find({ Code: req.body.code }).populate("participants")
+//         const courseCode=;
+// console.log(req.params.id)
+
+        const course = await Course.find({ Code:req.params.id }).populate("participants")
         res.status(200).json({ course })
 
     }
