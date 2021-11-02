@@ -8,9 +8,12 @@ module.exports = {
     },
     newHomework: async (req, res, next) => {
         const newHomework = new Homework(req.body);
+        const codigo= req.body.code;
+        // console.log(codigo)
+        
         try {
             const homework = await newHomework.save();
-            const course = await Course.find({ Code: req.body.Course })
+            const course = await Course.findOneAndUpdate({ code:codigo }, { $push: { 'homeworks': homework._id } })
             
             res.status(200).json(homework);
         } catch (e) {
