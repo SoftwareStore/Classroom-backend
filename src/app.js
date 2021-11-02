@@ -4,6 +4,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser")
+
+const lib = require('./Test/TestData/Users');
 const app = express();
 
 //settings
@@ -17,9 +19,11 @@ app.use(cookieParser())
 //RUTAS
 const userRoutes = require('./Routes/User/userRoute');
 const courseRoutes = require('./Routes/Course/courseRoute');
+const homeworkRoutes = require('./Routes/Homework/homeworkRoute');
 
 app.use('/api/user', userRoutes);
 app.use('/api/course', courseRoutes);
+app.use('/api/homework', homeworkRoutes);
 
 //DATABASE
 mongoose.Promise = global.Promise;
@@ -34,6 +38,7 @@ app.use(morgan('dev'));
 //   }));
 //start server
 app.listen(app.get('port'), () => {
+  // try { lib.createUsers(); } catch (e) { console.log(e) }
 
   //  console.log('server on port',app.get('port'));
   //  cron.schedule('*/1 * * * *', () => {
