@@ -20,10 +20,10 @@ module.exports = {
     },
     getCourse: async (req, res, next) => {
         //Obtiene un curso ingresando el codigo del curso
-//         const courseCode=;
-// console.log(req.params.id)
+        //         const courseCode=;
+        // console.log(req.params.id)
 
-        const course = await Course.find({ Code:req.params.id }).populate("participants").populate("homeworks")
+        const course = await Course.find({ Code: req.params.id }).populate("participants").populate("homeworks")
         res.status(200).json({ course })
 
     }
@@ -31,10 +31,11 @@ module.exports = {
     addParticipant: async (req, res, next) => {
         //Agrega un participante existente al array de participantes , asimismo el curso es agregado al array de cursos del participante
         const courseCode = req.body.code;
+        console.log(courseCode)
         const participants = req.body.participants;
         var codes = participants.values();
 
-        const course = await Course.findOneAndUpdate({ code: courseCode }, { $push: { 'participants': participants } })
+        const course = await Course.findOneAndUpdate({ Code: courseCode }, { $push: { 'participants': participants } })
         const courseId = course._id
         for (let user of codes) {
 
@@ -44,7 +45,7 @@ module.exports = {
         res.status(200).json({ course });
 
     },
-    
+
 
 
 

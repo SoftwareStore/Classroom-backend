@@ -13,7 +13,7 @@ module.exports = {
         
         try {
             const homework = await newHomework.save();
-            const course = await Course.findOneAndUpdate({ code:codigo }, { $push: { 'homeworks': homework._id } })
+            const course = await Course.findOneAndUpdate({ Code:codigo }, { $push: { 'homeworks': homework._id } })
             
             res.status(200).json(homework);
         } catch (e) {
