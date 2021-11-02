@@ -23,7 +23,7 @@ module.exports = {
 //         const courseCode=;
 // console.log(req.params.id)
 
-        const course = await Course.find({ Code:req.params.id }).populate("participants")
+        const course = await Course.find({ Code:req.params.id }).populate("participants").populate("homeworks")
         res.status(200).json({ course })
 
     }
