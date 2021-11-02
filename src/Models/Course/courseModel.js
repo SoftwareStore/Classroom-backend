@@ -6,7 +6,8 @@ const courseSchema = new Schema({
     Name: String,
     TypeOfCourse: String,
     participants: [{ type: Schema.Types.ObjectId,ref:"user" }],
-    homeworks:[{type:Schema.Types.ObjectId,ref:"homework"}]
+    homeworks:[{type:Schema.Types.ObjectId,ref:"homework"}],
+    announcements:[{type:Schema.Types.ObjectId,ref:"announcement"}]
 
 });
 

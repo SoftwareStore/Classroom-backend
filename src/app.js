@@ -20,10 +20,12 @@ app.use(cookieParser())
 const userRoutes = require('./Routes/User/userRoute');
 const courseRoutes = require('./Routes/Course/courseRoute');
 const homeworkRoutes = require('./Routes/Homework/homeworkRoute');
+const announcementRoutes = require('./Routes/Announcement/announcementRoute');
 
 app.use('/api/user', userRoutes);
 app.use('/api/course', courseRoutes);
 app.use('/api/homework', homeworkRoutes);
+app.use('/api/announcement', announcementRoutes);
 
 //DATABASE
 mongoose.Promise = global.Promise;
