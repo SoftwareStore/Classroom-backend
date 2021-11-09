@@ -1,0 +1,67 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Classroom",
+    "version": "1.0",
+    "summary": "Backend del proyecto de Desarrollo de Software",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://classroombackend.herokuapp.com"
+    }
+  ],
+  "paths": {
+    "/api/user": {
+      "get": {
+        "summary": "Obtener todos los usuarios",
+        "tags": [],
+        "responses": {},
+        "operationId": "Obtener todos los usuarios",
+        "description": "Al acceder a esta ruta se obtendra como respuesta la lista completa de usuarios registrados"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "description": "",
+        "examples": [
+          {
+            "firstName": "Luis",
+            "lastName": "Garcia",
+            "age": 21,
+            "email": "123@mail.com",
+            "password": "123",
+            "role": "student"
+          }
+        ],
+        "properties": {
+          "Nombre": {
+            "type": "string"
+          },
+          "Apellido": {
+            "type": "string"
+          },
+          "Edad": {
+            "type": "integer"
+          },
+          "Email": {
+            "type": "string"
+          },
+          "Contraseña": {
+            "type": "string"
+          },
+          "Rol": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {}
+  }
+}
