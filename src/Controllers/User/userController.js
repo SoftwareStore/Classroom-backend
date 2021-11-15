@@ -6,26 +6,35 @@ module.exports = {
         const users = await User.find({});
         res.status(200).json(users);
     },
+
     logOut: async (req, res, next) => {
         try {
-            res.clearCookie("idUsuario")
+            // res.clearCookie("idUsuario")
             res.status(200).json({ success:true })
         } catch (e) {
             console.log(e)
         }
 
-    }
-    ,
+    },
+
+    user: async (req, res, next) => {
+        try {
+            res.status(200).json({ success: true })
+        } catch (e) {
+            console.log(e)
+            res.status(500).json({ success: false });
+        }
+    },
+
     newUser: async (req, res, next) => {
         //Genera un nuevo usuario
-        const newUser = new User(req.body);
+        //const newUser = new User(req.body);
+
         try {
-            const user = await newUser.save();
+            //const user = await newUser.save();
             // console.log(user)
-            res.cookie('idUsuario', user._id)
+            // res.cookie('idUsuario', user._id)
             res.status(200).json({ success: true })
-
-
         } catch (e) {
             console.log(e)
             res.status(500).json({ success: false });
