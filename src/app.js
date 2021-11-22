@@ -12,6 +12,24 @@ const lib = require('./Test/TestData/Users');
 const app = express();
 const User = require("./Models/User/userModel");
 
+//agrego
+const authRoutes = require('./Routes/Auth-routes/auth-routes');
+const passportSetup = require('../config/passport-setup')
+const keys = require('../config/keys')
+const cookieSession = require('cookie-session')
+// set view engine
+app.set('view engine', 'ejs');
+// usando Cookies
+app.use(cookieSession({
+  maxAge: 24*60*60*1000,
+  keys: [keys.session.cookieKey]
+}))
+// set up routes
+app.use('/auth', authRoutes);
+app.get('/', (req, res) => {
+  res.render('home');
+});
+
 //settings
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());

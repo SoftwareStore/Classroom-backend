@@ -6,6 +6,8 @@ const userSchema = new Schema({
     lastName: String,
     age: Number,
     email: { type: String, unique: 'El email ({VALUE}) ya esta en uso.' },
+    googleId: String,
+    username: String,
     password: {
         type: String,
         select: false
