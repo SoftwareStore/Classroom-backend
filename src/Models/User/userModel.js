@@ -5,15 +5,10 @@ const userSchema = new Schema({
     firstName: String,
     lastName: String,
     age: Number,
-    email: { type: String, unique: 'El email ({VALUE}) ya esta en uso.' },
-    googleId: String,
-    username: String,
-    password: {
-        type: String,
-        select: false
-    },
+    email: { type: String, unique: 'El email ya esta en uso.' },
     role: String,
-    courses: [{ type: Schema.Types.ObjectId, ref: "course" }]
+    username: String,
+    googleId: String
 });
 
 const User = mongoose.model('user', userSchema);
