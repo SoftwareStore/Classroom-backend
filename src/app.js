@@ -12,7 +12,7 @@ const lib = require('./Test/TestData/Users');
 const app = express();
 const User = require("./Models/User/userModel");
 
-//agrego
+//Agregado*****************************
 const authRoutes = require('./Routes/Auth-routes/auth-routes');
 const passportSetup = require('../config/passport-setup')
 const keys = require('../config/keys')
@@ -24,11 +24,7 @@ app.use(cookieSession({
   maxAge: 24*60*60*1000,
   keys: [keys.session.cookieKey]
 }))
-// set up routes
-app.use('/auth', authRoutes);
-app.get('/', (req, res) => {
-  res.render('home');
-});
+//*****************************
 
 //settings
 app.set('port', process.env.PORT || 5000);
@@ -110,6 +106,15 @@ app.get("/user", (req, res) => {
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb+srv://hasser:eo8ENRtR8lnASuv8@cluster0.9awkq.mongodb.net/classroom', { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
 
+//Agregado**********************
+// set up routes
+app.use('/auth', authRoutes);
+
+// create home route
+app.get('/', (req, res) => {
+    res.render('home');
+});
+//*****************************
 
 //middlewares
 
