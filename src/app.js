@@ -39,11 +39,13 @@ const userRoutes = require('./Routes/User/userRoute');
 const courseRoutes = require('./Routes/Course/courseRoute');
 const homeworkRoutes = require('./Routes/Homework/homeworkRoute');
 const announcementRoutes = require('./Routes/Announcement/announcementRoute');
+const examRoutes = require('./Routes/Exam/examRoute')
 
 app.use('/api/user', userRoutes);
 app.use('/api/course', courseRoutes);
 app.use('/api/homework', homeworkRoutes);
 app.use('/api/announcement', announcementRoutes);
+app.use('/api/exam', examRoutes);
 
 //         Login
 app.post("/login", (req, res, next) => {
