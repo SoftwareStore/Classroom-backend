@@ -30,17 +30,23 @@
     "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "ejs": "^3.1.6",
+<<<<<<< HEAD
     "dotenv": "^10.0.0",
+=======
+>>>>>>> parent of 234720f (Merge branch 'main' into main)
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^6.0.13",
     "morgan": "^1.10.0",
-    "multer": "^1.4.3",
     "passport": "^0.5.0",
     "passport-facebook": "^3.0.0",
     "passport-google-oauth2": "^0.2.0",
+<<<<<<< HEAD
     "passport-local": "^1.0.0",
     "path": "^0.12.7"
+=======
+    "passport-local": "^1.0.0"
+>>>>>>> parent of 234720f (Merge branch 'main' into main)
   },
   "devDependencies": {
     "nodemon": "^2.0.13"

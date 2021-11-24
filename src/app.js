@@ -12,7 +12,7 @@ const lib = require('./Test/TestData/Users');
 const app = express();
 const User = require("./Models/User/userModel");
 
-
+//Agregado*****************************
 const authRoutes = require('./Routes/Auth-routes/auth-routes');
 const passportSetup = require('../config/passport-setup')
 const keys = require('../config/keys')
@@ -24,9 +24,7 @@ app.use(cookieSession({
   maxAge: 24*60*60*1000,
   keys: [keys.session.cookieKey]
 }))
-
-
-require('dotenv').config()
+//*****************************
 
 //settings
 app.set('port', process.env.PORT || 5000);
@@ -55,13 +53,11 @@ const userRoutes = require('./Routes/User/userRoute');
 const courseRoutes = require('./Routes/Course/courseRoute');
 const homeworkRoutes = require('./Routes/Homework/homeworkRoute');
 const announcementRoutes = require('./Routes/Announcement/announcementRoute');
-const examRoutes = require('./Routes/Exam/examRoute')
 
 app.use('/api/user', userRoutes);
 app.use('/api/course', courseRoutes);
 app.use('/api/homework', homeworkRoutes);
 app.use('/api/announcement', announcementRoutes);
-app.use('/api/exam', examRoutes);
 
 //         Login
 app.post("/login", (req, res, next) => {
@@ -108,9 +104,9 @@ app.get("/user", (req, res) => {
 
 //DATABASE
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.BD_HOST, { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
+mongoose.connect('mongodb+srv://hasser:eo8ENRtR8lnASuv8@cluster0.9awkq.mongodb.net/classroom', { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
 
-
+//Agregado**********************
 // set up routes
 app.use('/auth', authRoutes);
 
@@ -118,7 +114,7 @@ app.use('/auth', authRoutes);
 app.get('/', (req, res) => {
     res.render('home');
 });
-
+//*****************************
 
 //middlewares
 

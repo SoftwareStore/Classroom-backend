@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "238f31e7-4945-44fb-959b-480fe0e6dd11",
+		"_postman_id": "cda9a130-f4e2-4927-a943-82989cf5c9c9",
 		"name": "Clasroom",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -395,94 +395,6 @@
 								"api",
 								"announcement",
 								"newAnnouncement"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Exam",
-			"item": [
-				{
-					"name": "Index",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:5000/api/exam/index",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"exam",
-								"index"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Exam",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"Questions\": \"2+2\",\r\n    \"Answers\": \"4\",\r\n    \"grade\": 20,\r\n    \"name\": \"Examen de prueba\",\r\n    \"Course\": \"619bd121b5821982ea6e4a5f\",\r\n    \"Start\": \"2021-11-23\",\r\n    \"End\": \"2021-11-24\"\r\n}"
-						},
-						"url": {
-							"raw": "localhost:5000/api/exam/newExam",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"exam",
-								"newExam"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Exam by ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"_id\":\"619d8999082434558d59419c\"\r\n}"
-						},
-						"url": {
-							"raw": "localhost:5000/api/exam/main",
-							"host": [
-								"localhost"
-							],
-							"port": "5000",
-							"path": [
-								"api",
-								"exam",
-								"main"
 							]
 						}
 					},

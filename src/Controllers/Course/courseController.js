@@ -1,6 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-const directory = 'D:/Classroom-backend/files/courses'
 const Course = require('../../Models/Course/courseModel');
 const User = require('../../Models/User/userModel')
 module.exports = {
@@ -12,10 +9,9 @@ module.exports = {
     newCourse: async (req, res, next) => {
         //Genera un nuevo curso
         const newCourse = new Course(req.body);
+
         try {
             const course = await newCourse.save();
-            const dirPath = path.join(directory, req.body.Code)
-            fs.mkdirSync(dirPath);
             res.status(200).json(course);
         } catch (e) {
             console.log(e);
