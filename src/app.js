@@ -11,7 +11,23 @@ const passportLocal = require('passport-local').Strategy;
 const lib = require('./Test/TestData/Users');
 const app = express();
 const User = require("./Models/User/userModel");
+
+
+const authRoutes = require('./Routes/Auth-routes/auth-routes');
+const passportSetup = require('../config/passport-setup')
+const keys = require('../config/keys')
+const cookieSession = require('cookie-session')
+// set view engine
+app.set('view engine', 'ejs');
+// usando Cookies
+app.use(cookieSession({
+  maxAge: 24*60*60*1000,
+  keys: [keys.session.cookieKey]
+}))
+
+
 require('dotenv').config()
+
 //settings
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json());
@@ -93,6 +109,15 @@ app.get("/user", (req, res) => {
 //DATABASE
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.BD_HOST, { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
+
+
+// set up routes
+app.use('/auth', authRoutes);
+
+// create home route
+app.get('/', (req, res) => {
+    res.render('home');
+});
 
 
 //middlewares
