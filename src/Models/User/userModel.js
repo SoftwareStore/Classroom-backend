@@ -12,8 +12,13 @@ const userSchema = new Schema({
         select: true
     },
     role: String,
-    // username: String,
-    // googleId: String,
+    username: String,
+    facebookId: String,
+    googleId: String,
+    },
+    role: String,
+
+
     courses: [{ type: Schema.Types.ObjectId, ref: "course" }]
 });
 userSchema.methods.comparePassword= function (password) {
