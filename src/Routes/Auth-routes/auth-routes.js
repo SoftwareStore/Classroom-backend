@@ -10,7 +10,8 @@ router.get('/login', (req, res) => {
 router.get('/logout', (req, res) => {
     // handle with passport
     req.logout();
-    res.redirect('/');
+    req.session = null;
+    res.redirect('http://localhost:3000');
 });
 
 // auth with google+
@@ -20,7 +21,7 @@ router.get('/google', passport.authenticate('google',{
 
 // callback route for google to redirect to
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.send(req.user)
+    res.redirect('http://localhost:3000/ListCurso')
 });
 
 // auth with facebook
@@ -28,7 +29,7 @@ router.get('/facebook', passport.authenticate('facebook'));
 
 // callback route for facebook to redirect to
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
-    res.send(req.user)
+    res.redirect('http://localhost:3000/ListCurso')
 });
 
 module.exports = router;
