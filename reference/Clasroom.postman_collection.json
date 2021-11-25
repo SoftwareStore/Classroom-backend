@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "238f31e7-4945-44fb-959b-480fe0e6dd11",
+		"_postman_id": "ffd01450-043e-40c3-8e9e-7fcebe95a367",
 		"name": "Clasroom",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -176,7 +176,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "localhost:5000/api/course/ABC1234",
+									"raw": "localhost:5000/api/course/BCD123",
 									"host": [
 										"localhost"
 									],
@@ -184,7 +184,7 @@
 									"path": [
 										"api",
 										"course",
-										"ABC1234"
+										"BCD123"
 									]
 								}
 							},
@@ -426,7 +426,40 @@
 					"response": []
 				},
 				{
-					"name": "New Exam",
+					"name": "Exam by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"619ecd1a192df72bf55d2a17\"\r\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/api/exam/main",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"exam",
+								"main"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Exam",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -438,7 +471,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Questions\": \"2+2\",\r\n    \"Answers\": \"4\",\r\n    \"grade\": 20,\r\n    \"name\": \"Examen de prueba\",\r\n    \"Course\": \"619bd121b5821982ea6e4a5f\",\r\n    \"Start\": \"2021-11-23\",\r\n    \"End\": \"2021-11-24\"\r\n}"
+							"raw": "{\r\n    \"Questions\": [\"1+1\",\"2+2\",\"3+3\"],\r\n    \"Answers\":[\"2\",\"4\",\"5\"],\r\n    \"Grade\": 20,\r\n    \"Name\":\"Test5\",\r\n    \"Course\":\"619eae7b5985056feac4c8b5\",\r\n    \"Start\":\"2021-11-24\",\r\n    \"End\": \"2021-11-25\",\r\n    \"code\":\"BCD123\"\r\n}"
 						},
 						"url": {
 							"raw": "localhost:5000/api/exam/newExam",
@@ -456,12 +489,9 @@
 					"response": []
 				},
 				{
-					"name": "Get Exam by ID",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "New Request",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -471,10 +501,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\":\"619d8999082434558d59419c\"\r\n}"
+							"raw": "{\r\n    \"_id\":\"619edb6a8467933a19fc0847\",\r\n    \"code\": \"ABD1235\"\r\n}"
 						},
 						"url": {
-							"raw": "localhost:5000/api/exam/main",
+							"raw": "localhost:5000/api/exam/deleteExam",
 							"host": [
 								"localhost"
 							],
@@ -482,7 +512,7 @@
 							"path": [
 								"api",
 								"exam",
-								"main"
+								"deleteExam"
 							]
 						}
 					},

@@ -1,12 +1,24 @@
 const express = require("express");
 const router = express.Router();
+const passport = require('passport');
 
-const { index, newUser, getCourses, addCourse, logOut } = require('../../Controllers/User/userController');
+const { index, user, user2, newUser, getCourses, addCourse, logOut } = require('../../Controllers/User/userController');
 
-router.get('/', index);
-router.get('/logout', logOut);
-router.get('/courses', getCourses);
-router.post('/', newUser);
-router.post('/courses', addCourse);
+router.get('/', isAuthenticated, index);
+router.get('/logout',isAuthenticated, logOut);
+router.get('/login', isAuthenticated, user2);
+router.post('/login', passport.authenticate('localLogin'), user);
+router.post('/register', passport.authenticate('localRegister'), newUser);
+router.get('/courses', isAuthenticated, getCourses);
+router.post('/courses', isAuthenticated, addCourse);
+
+function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    else{
+        res.status(400).json({ success: "no Logeado" })
+    }
+}
 
 module.exports = router;

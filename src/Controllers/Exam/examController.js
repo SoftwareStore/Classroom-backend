@@ -9,11 +9,10 @@ module.exports = {
     newExam: async (req, res, next) => {
         const newExam = new Exam(req.body);
         const codigo= req.body.code;
-        // console.log(codigo)
         
         try {
             const exam = await newExam.save();
-            //const course = await Course.findOneAndUpdate({ Code:codigo }, { $push: { 'homeworks': homework._id } })
+            await Course.findOneAndUpdate({ Code:codigo }, { $push: { 'exams': exam._id } })
             
             res.status(200).json(exam);
         } catch (e) {
@@ -22,7 +21,14 @@ module.exports = {
         }
     },
     getExam: async(req,res,next)=>{
-        const exam = await Exam.find({_id:req.body._id}).populate("Course")
+        const exam = await Exam.find({_id:req.body._id}).populate("Course");
         res.status(200).json({exam})
+    },
+    delExam: async(req,res,next)=>{
+        const codigo= req.body.code;
+        await Exam.findByIdAndDelete(req.body._id)
+        await Course.findOneAndUpdate({ Code:codigo }, { $pull: { 'exams': req.body._id } })
+        res.status(204).json()
+
     }
 }

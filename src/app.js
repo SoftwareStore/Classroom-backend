@@ -4,58 +4,39 @@ const cors = require('cors');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const passport = require('passport');
-const passportLocal = require('passport-local').Strategy;
+
 const lib = require('./Test/TestData/Users');
+
+// Iniciamos Express
 const app = express();
-const User = require("./Models/User/userModel");
-
-
-const authRoutes = require('./Routes/Auth-routes/auth-routes');
-const passportSetup = require('../config/passport-setup')
-const keys = require('../config/keys')
-const cookieSession = require('cookie-session')
-// set view engine
-app.set('view engine', 'ejs');
-// usando Cookies
-app.use(cookieSession({
-  maxAge: 24*60*60*1000,
-  keys: [keys.session.cookieKey]
-}))
-
-
-require('dotenv').config()
 
 //settings
 app.set('port', process.env.PORT || 5000);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({ origin: "*", credentials: true })); // <-- modificado para conectar con react
-app.use(
-  session({ 
-    secret: "secretCode", 
-    resave: true, 
-    saveUninitialized: true
-  })
-);
+app.use(cors({ origin: "http://localhost:3000", credentials: true })); // <-- modificado para conectar con react
+
+//middlewares
 app.use(morgan('dev'));
-app.use(cookieParser("secretcode"));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
+app.use(session({ 
+  secret: "mysecretsession", 
+  resave: true, 
+  saveUninitialized: true
+})
+);
 app.use(passport.initialize());
 app.use(passport.session());
-require("./passportConfig")(passport);
-// app.use(cors());
-// app.use(express.json());
-// app.use(cookieParser())
-// app.use(cors({ origin: [process.env.CLIENT_URL], credentials: true }));
+require('./Passport/passportConfig');
 
 //RUTAS
 const userRoutes = require('./Routes/User/userRoute');
 const courseRoutes = require('./Routes/Course/courseRoute');
 const homeworkRoutes = require('./Routes/Homework/homeworkRoute');
 const announcementRoutes = require('./Routes/Announcement/announcementRoute');
-const examRoutes = require('./Routes/Exam/examRoute')
+const examRoutes = require('./Routes/Exam/examRoute');
 
 app.use('/api/user', userRoutes);
 app.use('/api/course', courseRoutes);
@@ -63,69 +44,45 @@ app.use('/api/homework', homeworkRoutes);
 app.use('/api/announcement', announcementRoutes);
 app.use('/api/exam', examRoutes);
 
-//         Login
-app.post("/login", (req, res, next) => {
-  passport.authenticate("local", (err, email, info) => {
-    if (err) throw err;
-    if (!email) res.send("No Existe el Email");
-    else {
-      req.logIn(email, (err) => {
-        if (err) throw err;
-        res.send("Autenticado Exitosamente");
-        console.log(req.email);
-      });
-    }
-  })(req, res, next);
-});
+// //settings2
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cookieParser("secretcode"));
 
-//         Registro
-app.post("/register", (req, res) => {
-  User.findOne({ email: req.body.email }, async (err, doc) => {
-    if (err) throw err;
-    if (doc) res.send("Email Ya existe");
-    if (!doc) {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-      const newUser = new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        age: req.body.age,
-        email: req.body.email,
-        password: hashedPassword,
-        role: req.body.role,
-      });
-      await newUser.save();
-      res.send("User Creado");
-    }
-  });
-});
+// //Agregado*****************************
+// const authRoutes = require('./Routes/Auth-routes/auth-routes');
+// const passportSetup = require('../config/passport-setup')
+// const keys = require('../config/keys')
+// const cookieSession = require('cookie-session')
+// // set view engine
+// app.set('view engine', 'ejs');
+// // usando Cookies
+// app.use(cookieSession({
+//   maxAge: 24*60*60*1000,
+//   keys: [keys.session.cookieKey]
+// }))
+// //*****************************
 
-//         User
-app.get("/user", (req, res) => {
-  res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
-});
+
+
+
+
+
+// //Agregado**********************
+// // set up routes
+// app.use('/auth', authRoutes);
+
+// // create home route
+// app.get('/', (req, res) => {
+//     res.render('home');
+// });
+// //*****************************
 
 
 //DATABASE
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.BD_HOST, { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
-
-
-// set up routes
-app.use('/auth', authRoutes);
-
-// create home route
-app.get('/', (req, res) => {
-    res.render('home');
-});
-
-
-//middlewares
-
-app.use(express.urlencoded({
-    extended: true
-  }));
-
+mongoose.connect('mongodb+srv://hasser:eo8ENRtR8lnASuv8@cluster0.9awkq.mongodb.net/classroom', { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
 
 //start server
 app.listen(app.get('port'), () => {
