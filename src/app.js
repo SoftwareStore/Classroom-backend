@@ -6,11 +6,20 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
+const passportSetup = require('../config/passport-setup')
+const keys = require('../config/keys')
+const cookieSession = require('cookie-session')
 
 const lib = require('./Test/TestData/Users');
 
 // Iniciamos Express
 const app = express();
+
+// usando Cookies
+app.use(cookieSession({
+  maxAge: 24*60*60*1000,
+  keys: [keys.session.cookieKey]
+}))
 
 //settings
 app.set('port', process.env.PORT || 5000);
@@ -32,12 +41,14 @@ app.use(passport.session());
 require('./Passport/passportConfig');
 
 //RUTAS
+const authRoutes = require('./Routes/Auth-routes/auth-routes');
 const userRoutes = require('./Routes/User/userRoute');
 const courseRoutes = require('./Routes/Course/courseRoute');
 const homeworkRoutes = require('./Routes/Homework/homeworkRoute');
 const announcementRoutes = require('./Routes/Announcement/announcementRoute');
 const examRoutes = require('./Routes/Exam/examRoute');
 
+app.use('/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/course', courseRoutes);
 app.use('/api/homework', homeworkRoutes);
