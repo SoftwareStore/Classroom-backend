@@ -17,13 +17,14 @@ app.set('port', process.env.PORT || 5000);
 app.use(cors({ origin: "http://localhost:3000", credentials: true })); // <-- modificado para conectar con react
 
 //middlewares
-app.use(express.json());
 app.use(morgan('dev'));
-app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 app.use(session({ 
   secret: "mysecretsession", 
-  resave: false, 
-  saveUninitialized: false
+  resave: true, 
+  saveUninitialized: true
 })
 );
 app.use(passport.initialize());

@@ -5,6 +5,16 @@ const localStrategy = require("passport-local").Strategy;
 // Modulo de usuario
 const User = require("../Models/User/userModel");
 
+
+passport.serializeUser((user, done) => {
+  done(null, user._id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user);
+});
+
 passport.use('localRegister', new localStrategy({
   usernameField: 'email',
   passwordField: 'password',
@@ -23,13 +33,6 @@ passport.use('localRegister', new localStrategy({
       password: hashedPassword,
       role: req.body.role
     });
-
-    // newUser.firstName = req.body.firstName;
-    // newUser.lastName = req.body.lastName;
-    // newUser.age = req.body.age;
-    // newUser.email = email;
-    // newUser.password = hashedPassword;
-    // newUser.role = req.body.role;
     await newUser.save();
     done(null, newUser);
   }
@@ -43,19 +46,22 @@ passport.use('localLogin', new localStrategy({
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = await User.findOne({ email: email });
   if (!user) {
-    return done(null, false);
+    return done(null, false,{message: "no registrado"});
+  }else{
+    const match= await user.comparePassword(password);
+    if (match) {
+      return done(null, user);
+    }else{
+      return done(null, false,{message: "contraseña incorrecta"});
+    }
+
   }
-  if (!user.comparePassword(password)) {
-    return done(null, false);
-  }
-  return done(null, user);
+  
 }));
 
-passport.serializeUser((user, done) => {
-  done(null, user._id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id);
-  done(null, user);
-});
+exports.isAuthenticated = (req, res, next) =>{
+  if (req.isAuthenticated()) {
+      return next();
+  }
+  res.status(401).json({success: false});
+}
