@@ -15,7 +15,7 @@ const userSchema = new Schema({
     username: String,
     facebookId: String,
     googleId: String,
-    },
+    
     role: String,
 
 
