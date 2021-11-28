@@ -18,7 +18,6 @@ module.exports = {
             //res.logout();
             req.session = null;
             res.clearCookie("connect.sid")
-            console.log(req.isAuthenticated());
             res.status(200).json({ success: true, status: "logout", })
         } catch (e) {
             console.log(e)
@@ -54,7 +53,6 @@ module.exports = {
             // console.log(user)
             // res.cookie('idUsuario', user._id)
             res.status(200).json({ success: true })
-            res.redirect('/');
         } catch (e) {
             console.log(e)
             res.status(500).json({ success: false });

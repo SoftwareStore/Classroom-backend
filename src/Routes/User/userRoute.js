@@ -11,7 +11,7 @@ router.post('/login', passport.authenticate('localLogin'), user);
 router.post('/register', passport.authenticate('localRegister'), newUser);
 router.get('/courses', isAuthenticated, getCourses);
 router.post('/courses', isAuthenticated, addCourse);
-
+ 
 function isAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();

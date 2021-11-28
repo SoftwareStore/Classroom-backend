@@ -43,7 +43,6 @@ passport.use('localLogin', new localStrategy({
   passwordField: 'password',
   passReqToCallback: true
 }, async (req, email, password, done) => {
-  const hashedPassword = await bcrypt.hash(password, 10);
   const user = await User.findOne({ email: email });
   if (!user) {
     return done(null, false,{message: "no registrado"});
