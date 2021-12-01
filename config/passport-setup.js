@@ -26,7 +26,6 @@ passport.use(
             .then((currentUser) => {
                 if(currentUser){
                     // allready have the user
-                    console.log('user:id' + currentUser);
                     done(null, currentUser);
                 }else{
                     // if not, create user in our DB
@@ -35,14 +34,10 @@ passport.use(
                         email: profile.id,
                         facebookId: profile.id
                     }).save().then((newUser) => {
-                        console.log('new user created: ', newUser);
                         done(null, newUser);
                     });
                 }
             })
-        // passport callback function
-        console.log('passport callback function fired:');
-        console.log(profile);
     })
 );
 
@@ -58,7 +53,6 @@ passport.use(
             .then((currentUser) => {
                 if(currentUser){
                     // allready have the user
-                    console.log('user:id' + currentUser);
                     done(null, currentUser);
                 }else{
                     // if not, create user in our DB
@@ -69,13 +63,9 @@ passport.use(
                         googleId: profile.id,
                         email:profile.id
                     }).save().then((newUser) => {
-                        console.log('new user created: ', newUser);
                         done(null, newUser);
                     });
                 }
             })
-        // passport callback function
-        console.log('passport callback function fired:');
-        console.log(profile);
     })
 );
