@@ -16,14 +16,15 @@ router.get('/logout', (req, res) => {
 
 // auth with google+
 router.get('/google', passport.authenticate('google',{
-    scope:['profile']
+    scope:['email', 'profile']
 }));
 
 // callback route for google to redirect to
-router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.redirect('http://localhost:3000/ListCurso')
-});
-
+app.get( '/google/redirect',
+    passport.authenticate( 'google', {
+        successRedirect: 'http://localhost:3000/ListCurso',
+        failureRedirect: 'http://localhost:3000/'
+}));
 // auth with facebook
 router.get('/facebook', passport.authenticate('facebook'));
 
