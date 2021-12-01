@@ -20,7 +20,7 @@ router.get('/google', passport.authenticate('google',{
 }));
 
 // callback route for google to redirect to
-app.get( '/google/redirect',
+router.get( '/google/redirect',
     passport.authenticate( 'google', {
         successRedirect: 'http://localhost:3000/ListCurso',
         failureRedirect: 'http://localhost:3000/'
