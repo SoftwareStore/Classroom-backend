@@ -22,8 +22,8 @@ router.get('/google', passport.authenticate('google',{
 // callback route for google to redirect to
 router.get( '/google/redirect',
     passport.authenticate( 'google', {
-        successRedirect: 'http://localhost:3000/ListCurso',
-        failureRedirect: 'http://localhost:3000/'
+        successRedirect: 'https://classroombackend.herokuapp.com/',
+        failureRedirect: 'https://classroombackend.herokuapp.com/auth/login'
 }));
 // auth with facebook
 router.get('/facebook', passport.authenticate('facebook'));
