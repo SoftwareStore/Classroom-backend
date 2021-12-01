@@ -37,7 +37,9 @@ module.exports = {
 
     user2: async (req, res, next) => {
         try {
-            res.status(200).json({ user: req.user })
+            const email = req.user.email;
+            const user = await User.find({ email : email})
+            res.status(200).json(user)
         } catch (e) {
             console.log(e)
             res.status(500).json({ success: false });
