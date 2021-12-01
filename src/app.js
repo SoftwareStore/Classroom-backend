@@ -48,6 +48,7 @@ const homeworkRoutes = require('./Routes/Homework/homeworkRoute');
 const announcementRoutes = require('./Routes/Announcement/announcementRoute');
 const examRoutes = require('./Routes/Exam/examRoute');
 
+
 app.use('/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/course', courseRoutes);
@@ -67,7 +68,7 @@ app.use('/api/exam', examRoutes);
 // const keys = require('../config/keys')
 // const cookieSession = require('cookie-session')
 // // set view engine
-// app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 // // usando Cookies
 // app.use(cookieSession({
 //   maxAge: 24*60*60*1000,
@@ -85,9 +86,9 @@ app.use('/api/exam', examRoutes);
 // app.use('/auth', authRoutes);
 
 // // create home route
-// app.get('/', (req, res) => {
-//     res.render('home');
-// });
+app.get('/', (req, res) => {
+    res.render('home');
+});
 // //*****************************
 
 
