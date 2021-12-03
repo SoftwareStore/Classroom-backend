@@ -8,7 +8,7 @@ module.exports = {
     },
     newExam: async (req, res, next) => {
         const newExam = new Exam(req.body);
-        const codigo= req.body.code;
+       
         
         try {
             const exam = await newExam.save();
