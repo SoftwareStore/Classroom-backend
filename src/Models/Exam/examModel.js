@@ -13,9 +13,11 @@ const examSchema = new Schema({
 
     quizTitle: String,
     quizSynopsis: String,
-    answerSelectionType:String,
+    
     questions: [{
+        _id:false,
         question: String,
+        questionType:String,
         answerSelectionType: String,
         answers: [String],
         correctAnswer: String,
