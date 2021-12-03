@@ -21,7 +21,7 @@ module.exports = {
         }
     },
     getExam: async(req,res,next)=>{
-        const exam = await Exam.find({_id:req.body._id}).populate("Course");
+        const exam = await Exam.find({_id:req.params.id});
         res.status(200).json({exam})
     },
     delExam: async(req,res,next)=>{
