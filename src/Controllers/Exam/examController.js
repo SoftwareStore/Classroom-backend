@@ -8,11 +8,11 @@ module.exports = {
     },
     newExam: async (req, res, next) => {
         const newExam = new Exam(req.body);
-       
+      
         
         try {
             const exam = await newExam.save();
-            await Course.findOneAndUpdate({ Code:codigo }, { $push: { 'exams': exam._id } })
+            await Course.findOneAndUpdate({ Code: req.params.id }, { $push: { 'exams': exam._id } })
             
             res.status(200).json(exam);
         } catch (e) {

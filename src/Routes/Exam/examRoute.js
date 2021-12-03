@@ -5,6 +5,6 @@ const { index, newExam, getExam, delExam } = require('../../Controllers/Exam/exa
 
 router.get('/index', index);
 router.get('/main', getExam);
-router.post('/newExam', newExam);
+router.post('/newExam/:id', newExam);
 router.delete('/deleteExam',delExam);
 module.exports = router;
