@@ -61,17 +61,33 @@ module.exports = {
         }
     },
     getCourses: async (req, res, next) => {
-        //Obtiene los cursos en los que participa un usuario
-        const user = await User.find({ _id: req.body.id }).populate('courses')
-        res.status(200).json({ user })
+        try {
+            //Obtiene los cursos en los que participa un usuario
+            //const user = await User.find({ _id: req.body.id })
+            const useId = req.user.id;
+            const courses = await Course.find({participants: useId})
+            res.status(200).json( courses )
+        } catch (e) {
+            console.log(e)
+            res.status(500).json({ success: false });
+        }
     },
     addCourse: async (req, res, next) => {
-        //Agrega al un curso al array del usuario , asimismo el usuario es agregado al array de participantes del curso
-        const userId = req.body.userId;
-        const course = await Course.findOneAndUpdate({ Code: req.body.code }, { $push: { 'participants': userId } })
-        const courseId = course._id;
-        const user = await User.findOneAndUpdate({ _id: userId }, { $push: { 'courses': courseId } })
-        res.status(200).json({ user })
+        console.log(req.body.participants)
+        console.log(req.body.Code)
+        try {
+            //Agrega al un curso al array del usuario , asimismo el usuario es agregado al array de participantes del curso
+            const userId = req.body.participants;
+            const courseCode = req.body.Code;
+            const course = await Course.findOneAndUpdate({ Code: courseCode }, { $push: { 'participants': userId } })
+            const courseId = course._id;
+            const user = await User.findOneAndUpdate({ _id: userId }, { $push: { 'courses': courseId } })
+            res.status(200).json({ user })
+        } catch (e) {
+            console.log(e)
+            res.status(500).json({ success: false });
+        }
+        
     }
 
 

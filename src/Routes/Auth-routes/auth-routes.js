@@ -11,6 +11,7 @@ router.get('/logout', (req, res) => {
     // handle with passport
     req.logout();
     req.session = null;
+    res.clearCookie();
     res.redirect('http://localhost:3000');
 });
 
