@@ -1,37 +1,23 @@
-const router = require('express').Router();
+const express = require("express");
+const router = express.Router();
 const passport = require('passport')
 
-// auth login
-router.get('/login', (req, res) => {
-    res.render('login', { user: req.user });
-});
+const { login, logout, google, facebook} = require('../../Controllers/Auth-routes/auth-routesController');
 
-// auth logout
-router.get('/logout', (req, res) => {
-    // handle with passport
-    req.logout();
-    req.session = null;
-    res.clearCookie();
-    res.redirect('https://classroombackend.herokuapp.com/');
-});
-
-// auth with google+
-router.get('/google', passport.authenticate('google',{
-    scope:['email', 'profile']
-}));
-
-// callback route for google to redirect to
-router.get( '/google/redirect',
-    passport.authenticate( 'google', {
-        successRedirect: 'https://classroombackend.herokuapp.com/',
-        failureRedirect: 'https://classroombackend.herokuapp.com/auth/login'
-}));
-// auth with facebook
+router.get('/login', isAuthenticated, login);
+router.get('/logout', isAuthenticated, logout);
+router.get('/google', passport.authenticate('google',{scope:['email', 'profile']}));
 router.get('/facebook', passport.authenticate('facebook'));
+router.get( '/google/redirect', passport.authenticate( 'google'), google);
+router.get('/facebook/redirect', passport.authenticate('facebook'), facebook);
 
-// callback route for facebook to redirect to
-router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
-    res.redirect('https://classroombackend.herokuapp.com/')
-});
+function isAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    else{
+        res.status(400).json({ success: "no Logeado" })
+    }
+}
 
 module.exports = router;
