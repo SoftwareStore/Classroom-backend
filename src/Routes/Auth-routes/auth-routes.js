@@ -12,7 +12,7 @@ router.get('/logout', (req, res) => {
     req.logout();
     req.session = null;
     res.clearCookie();
-    res.redirect('http://localhost:3000');
+    res.redirect('https://classroombackend.herokuapp.com/');
 });
 
 // auth with google+
@@ -31,7 +31,7 @@ router.get('/facebook', passport.authenticate('facebook'));
 
 // callback route for facebook to redirect to
 router.get('/facebook/redirect', passport.authenticate('facebook'), (req, res) => {
-    res.redirect('http://localhost:3000/ListCurso')
+    res.redirect('https://classroombackend.herokuapp.com/')
 });
 
 module.exports = router;

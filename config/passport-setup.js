@@ -17,7 +17,7 @@ passport.deserializeUser((id, done) => {
 passport.use(
     new FacebookStrategy({
         // options for facebook strategy
-        callbackURL: '/auth/facebook/redirect',
+        callbackURL: 'https://classroombackend.herokuapp.com/auth/facebook/redirect',
         clientID: keys.facebook.clientID,
         clientSecret: keys.facebook.clientSecret
     }, (accessToken, refreshToken, profile, done) => {
@@ -44,7 +44,7 @@ passport.use(
 passport.use(
     new GoogleStrategy({
         // options for google strategy
-        callbackURL: '/auth/google/redirect',
+        callbackURL: 'https://classroombackend.herokuapp.com/auth/google/redirect',
         clientID: keys.google.clientID,
         clientSecret: keys.google.clientSecret,
         passReqToCallback   : true
