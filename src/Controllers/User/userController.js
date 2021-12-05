@@ -17,6 +17,7 @@ module.exports = {
         try {
             //res.logout();
             req.session = null;
+            res.clearCookie();
             res.clearCookie("connect.sid")
             res.status(200).json({ success: true, status: "logout", })
         } catch (e) {
