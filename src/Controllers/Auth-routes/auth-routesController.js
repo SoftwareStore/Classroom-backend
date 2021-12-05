@@ -15,7 +15,6 @@ module.exports = {
             req.logout();
             req.session = null;
             res.clearCookie();
-            res.redirect('https://classroombackend.herokuapp.com/');
             res.status(200).json({ success: true, status: "logout", })
         } catch (e) {
             console.log(e)
@@ -24,7 +23,6 @@ module.exports = {
     },
     google: async (req, res, next) => {
         try {
-            res.redirect('https://classroombackend.herokuapp.com/');
             res.status(200).json(users);
         } catch (e) {
             console.log(e)
@@ -33,7 +31,6 @@ module.exports = {
     },
     facebook: async (req, res, next) => {
         try {
-            res.redirect('https://classroombackend.herokuapp.com/');
             res.status(200).json(users);
         } catch (e) {
             console.log(e)
