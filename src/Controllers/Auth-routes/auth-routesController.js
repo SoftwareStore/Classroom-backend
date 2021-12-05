@@ -12,8 +12,6 @@ module.exports = {
     },
     logout: async (req, res, next) => {
         try {
-            //res.logout();
-            // handle with passport
             req.logout();
             req.session = null;
             res.clearCookie();
@@ -23,14 +21,12 @@ module.exports = {
             console.log(e)
             res.status(500).json({ success: false })
         }
-
     },
     google: async (req, res, next) => {
         try {
             res.redirect('https://classroombackend.herokuapp.com/');
             res.status(200).json(users);
         } catch (e) {
-            res.redirect('https://classroombackend.herokuapp.com/auth/login');
             console.log(e)
             res.status(500).json({ success: false })
         }
@@ -40,7 +36,6 @@ module.exports = {
             res.redirect('https://classroombackend.herokuapp.com/');
             res.status(200).json(users);
         } catch (e) {
-            res.redirect('https://classroombackend.herokuapp.com/auth/login');
             console.log(e)
             res.status(500).json({ success: false })
         }
