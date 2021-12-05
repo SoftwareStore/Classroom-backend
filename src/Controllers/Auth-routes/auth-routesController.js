@@ -23,7 +23,7 @@ module.exports = {
     },
     google: async (req, res, next) => {
         try {
-            res.status(402).json(users);
+            res.status(404).json(users);
         } catch (e) {
             console.log(e)
             res.status(500).json({ success: false })
@@ -31,7 +31,7 @@ module.exports = {
     },
     facebook: async (req, res, next) => {
         try {
-            res.status(402).json(users);
+            res.status(404).json(users);
         } catch (e) {
             console.log(e)
             res.status(500).json({ success: false })
