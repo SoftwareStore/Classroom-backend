@@ -38,9 +38,17 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+app.set("trust proxy", 1);
 app.use(session({ 
-  secret: "miClaveFavorite", 
-  resave: true, 
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 60,
+    sameSite: 'none',
+    secure: true
+  },
+  proxy: true,
+  httpOnly: true,
+  secret: 'miClaveFavorite',
+  resave: true,
   saveUninitialized: true
 })
 );
