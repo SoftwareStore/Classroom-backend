@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 const passport = require('passport')
 
-router.get('/google', passport.authenticate('google',{scope:['email','profile']}));
+router.get('/google', passport.authenticate('google'));
 router.get('/facebook', passport.authenticate('facebook'));
 
 router.get( '/google/redirect', passport.authenticate('google'), Google);
 function Google (req, res) {
-    res.redirect('https://classroombackend.herokuapp.com/');
+    res.redirect('http://localhost:3000/ListCurso');
 }
 
 router.get('/facebook/redirect', passport.authenticate('facebook'), Facebook);
