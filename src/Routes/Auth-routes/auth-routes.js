@@ -5,7 +5,7 @@ const passport = require('passport')
 router.get('/google', passport.authenticate('google',{scope:['email','profile']}));
 router.get('/facebook', passport.authenticate('facebook'));
 
-router.get( '/google/redirect', passport.authenticate('google'), Facebook);
+router.get( '/google/redirect', passport.authenticate('google'), Google);
 
 router.get('/facebook/redirect', passport.authenticate('facebook'), Facebook);
 
