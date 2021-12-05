@@ -12,4 +12,7 @@ router.get('/facebook/redirect', passport.authenticate('facebook'), Facebook);
 function Facebook (req, res) {
     res.redirect('http://localhost:3000/ListCurso');
 }
+function Google (req, res) {
+    res.redirect('https://classroombackend.herokuapp.com/');
+}
 module.exports = router;
