@@ -2,11 +2,11 @@ const express = require("express");
 const router = express.Router();
 const passport = require('passport')
 
-const { login, logout} = require('../../Controllers/Auth-Controllers/authController');
+const { login, logout} = require('../../Controllers/Auth-Controllers/authControllers');
 
 router.get('/login', login);
 router.get('/logout', logout);
-router.get('/google', passport.authenticate('google'));
+router.get('/google', passport.authenticate('google', {scope:['email','profile']}));
 router.get('/facebook', passport.authenticate('facebook'));
 
 router.get( '/google/redirect', passport.authenticate('google'), Google);
