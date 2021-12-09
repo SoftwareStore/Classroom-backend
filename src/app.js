@@ -63,7 +63,7 @@ const courseRoutes = require('./Routes/Course/courseRoute');
 const homeworkRoutes = require('./Routes/Homework/homeworkRoute');
 const announcementRoutes = require('./Routes/Announcement/announcementRoute');
 const examRoutes = require('./Routes/Exam/examRoute');
-
+const responExamRoutes = require('./Routes/Exam/responExam');
 
 app.use('/auth', authRoutes);
 app.use('/api/user', userRoutes);
@@ -71,7 +71,7 @@ app.use('/api/course', courseRoutes);
 app.use('/api/homework', homeworkRoutes);
 app.use('/api/announcement', announcementRoutes);
 app.use('/api/exam', examRoutes);
-
+app.use('/api/respon',responExamRoutes);
 // //settings2
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }));

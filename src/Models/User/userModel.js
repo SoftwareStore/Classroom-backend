@@ -15,13 +15,15 @@ const userSchema = new Schema({
     username: String,
     facebookId: String,
     googleId: String,
-    
+
     role: String,
 
 
-    courses: [{ type: Schema.Types.ObjectId, ref: "course" }]
+    courses: [{ type: Schema.Types.ObjectId, ref: "course" }],
+    exams: [{ type: Schema.Types.ObjectId, ref: "exams" }]
+
 });
-userSchema.methods.comparePassword= function (password) {
+userSchema.methods.comparePassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 
