@@ -4,20 +4,8 @@ const router = express.Router();
 const { index, newExam, getExam, delExam } = require('../../Controllers/Exam/examController.js')
 
 
-router.get('/index', isAuthenticated, index);
-router.get('/getExam/:id', isAuthenticated, getExam);
-router.post('/newExam/:id', isAuthenticated, newExam);
-router.delete('/deleteExam', isAuthenticated,delExam);
-
-
-
-
-function isAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    else{
-        res.status(400).json({ success: "no Logeado" })
-    }
-}
+router.get('/index', index);
+router.get('/getExam/:id', getExam);
+router.post('/newExam/:id', newExam);
+router.delete('/deleteExam',delExam);
 module.exports = router;

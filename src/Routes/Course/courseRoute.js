@@ -3,20 +3,8 @@ const router=express.Router();
 
 const {index,newCourse,addParticipant,getCourse} = require('../../Controllers/Course/courseController');
 
-router.get('/index',isAuthenticated,index);
-router.get('/:id',isAuthenticated,getCourse)
-router.post('/',isAuthenticated,newCourse);
-router.post('/add',isAuthenticated,addParticipant);
-
-
-
-function isAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    else{
-        res.status(400).json({ success: "no Logeado" })
-    }
-}
-
+router.get('/index',index);
+router.get('/:id',getCourse)
+router.post('/',newCourse);
+router.post('/add',addParticipant);
 module.exports=router;

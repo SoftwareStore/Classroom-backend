@@ -15,8 +15,8 @@ module.exports = {
             req.logout();
             req.session = null;
             res.clearCookie();
-            res.redirect('http://localhost:3000');
-            res.status(200);
+            res.redirect('https://classroombackend.herokuapp.com/');
+            res.status(200).json({ success: true, status: "logout", })
         } catch (e) {
             console.log(e)
             res.status(500).json({ success: false })
