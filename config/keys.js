@@ -8,5 +8,8 @@ module.exports = {
     facebook: {
         clientID: '1344601829302964',
         clientSecret: 'ffb5b973786c3d4b667bf92a84a6ed6a'
+    },
+    session: {
+        cookieKey: 'miClaveFavorite'
     }
 };

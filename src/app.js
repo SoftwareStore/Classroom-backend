@@ -15,12 +15,6 @@ const lib = require('./Test/TestData/Users');
 // Iniciamos Express
 const app = express();
 
-// usando Cookies
-app.use(cookieSession({
-  maxAge: 24*60*60*1000,
-  keys: [keys.facebook.clientSecret, keys.google.clientSecret]
-}))
-
 //settings
 app.set('port', process.env.PORT || 5000);
 //app.use(cors({ origin: "http://localhost:3000", credentials: true })); // <-- modificado para conectar con react
@@ -47,7 +41,7 @@ app.use(session({
   },
   proxy: true,
   httpOnly: true,
-  secret: 'miClaveFavorite',
+  secret: ['miClaveFavorite','w1f1mkDxVIuFaX6-biiTNbxH','ffb5b973786c3d4b667bf92a84a6ed6a'],
   resave: true,
   saveUninitialized: true
 })
