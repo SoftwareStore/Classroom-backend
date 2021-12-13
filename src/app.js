@@ -18,7 +18,11 @@ const app = express();
 // usando Cookies
 app.use(cookieSession({
   maxAge: 24*60*60*1000,
-  keys: [keys.session.cookieKey]
+  keys: [keys.facebook.clientSecret]
+}))
+app.use(cookieSession({
+  maxAge: 24*60*60*1000,
+  keys: [keys.google.clientSecret]
 }))
 
 //settings
