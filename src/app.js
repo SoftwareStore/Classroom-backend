@@ -15,11 +15,6 @@ const lib = require('./Test/TestData/Users');
 // Iniciamos Express
 const app = express();
 
-app.use(cookieSession({
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: [keys.session.cookieKey]
-}));
-
 //settings
 app.set('port', process.env.PORT || 5000);
 //app.use(cors({ origin: "http://localhost:3000", credentials: true })); // <-- modificado para conectar con react
