@@ -104,7 +104,7 @@ app.get('/', (req, res) => {
 
 //DATABASE
 mongoose.Promise = global.Promise;
-mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
+mongoose.connect('mongodb+srv://hasser:eo8ENRtR8lnASuv8@cluster0.9awkq.mongodb.net/classroom', { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
 
 //start server
 app.listen(app.get('port'), () => {

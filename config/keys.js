@@ -9,9 +9,6 @@ module.exports = {
         clientID: '1344601829302964',
         clientSecret: 'ffb5b973786c3d4b667bf92a84a6ed6a'
     },
-    mongodb: {
-        dbURI: 'mongodb+srv://hasser:eo8ENRtR8lnASuv8@cluster0.9awkq.mongodb.net/classroom'
-    },
     session: {
         cookieKey: 'miClaveFavorite'
     }
