@@ -15,6 +15,11 @@ const lib = require('./Test/TestData/Users');
 // Iniciamos Express
 const app = express();
 
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [keys.session.cookieKey]
+}));
+
 //settings
 app.set('port', process.env.PORT || 5000);
 //app.use(cors({ origin: "http://localhost:3000", credentials: true })); // <-- modificado para conectar con react
@@ -41,7 +46,7 @@ app.use(session({
   },
   proxy: true,
   httpOnly: true,
-  secret: ['miClaveFavorite','w1f1mkDxVIuFaX6-biiTNbxH','ffb5b973786c3d4b667bf92a84a6ed6a'],
+  secret: 'miClaveFavorite',
   resave: true,
   saveUninitialized: true
 })
@@ -104,7 +109,7 @@ app.get('/', (req, res) => {
 
 //DATABASE
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb+srv://hasser:eo8ENRtR8lnASuv8@cluster0.9awkq.mongodb.net/classroom', { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
+mongoose.connect(keys.mongodb.dbURI, { useNewUrlParser: true }).then(db => console.log('db is connected')).catch(err => console.log(err));
 
 //start server
 app.listen(app.get('port'), () => {
